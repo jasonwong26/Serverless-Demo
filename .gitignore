@@ -1,0 +1,12 @@
+# package directories
+node_modules
+jspm_packages
+
+# Deployment directories
+dev
+.serverless
+
+# Local settings
+.DS_Store
+.editorconfig
+.env

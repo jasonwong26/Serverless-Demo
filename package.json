@@ -1,0 +1,66 @@
+{
+  "name": "serverless-demo",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Trying out Serverless Framework",
+  "scripts": {
+    "prestart": "babel-node tools/startMessage.js",
+    "start": "npm-run-all --parallel test:watch lint:watch",
+    "lint": "tslint 'src/**/*.ts?(x)' || exit 0",
+    "lint:fix": "tslint 'src/**/*.ts?(x)' --fix",
+    "lint:watch": "chokidar 'src/**/*.ts?(x)' -c 'npm run lint' --initial --verbose",
+    "test": "mocha -r tools/testSetup.js 'src/**/*.test.ts?(x)' || exit 0",
+    "test:watch": "chokidar 'src/**/*.ts?(x)' -c 'npm run test' --initial --verbose",
+    "build": "npm-run-all --parallel build:src build:serverless",
+    "build:src": "babel-node tools/buildDev.js",
+    "build:serverless": "babel-node tools/buildServerless.js",
+    "predeploy": "",
+    "deploy": "serverless deploy --package ./src"
+  },
+  "author": "Jason Wong",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@types/aws-sdk": "^2.7.0",
+    "@types/uuid": "^3.4.3",
+    "aws-sdk": "^2.282.1",
+    "dotenv": "^6.0.0",
+    "typescript": "^2.9.2",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.9",
+    "@types/expect": "^1.20.3",
+    "@types/mocha": "^5.2.5",
+    "@types/sinon": "^5.0.1",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chokidar": "^2.0.4",
+    "chokidar-cli": "^1.2.0",
+    "colors": "^1.3.0",
+    "copy-webpack-plugin": "^4.5.2",
+    "expect": "^23.4.0",
+    "express": "^4.16.3",
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.1.3",
+    "opn": "^5.3.0",
+    "rimraf": "^2.6.2",
+    "sinon": "^6.1.4",
+    "ts-loader": "^4.4.2",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.11.0",
+    "webpack": "^4.16.0",
+    "webpack-cli": "^3.0.8"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonwong26/Serverless-Demo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jasonwong26/Serverless-Demo/issues"
+  },
+  "homepage": "https://github.com/jasonwong26/Serverless-Demo#readme"
+}
