@@ -23,7 +23,7 @@ const config = {
   devtool: "inline-source-map",
   mode: "development",
   target: 'node',
-  entry: ["./src/todos2"],
+  entry: ["./src/todos"],
   externals: [ "aws-sdk" ], // modules to be excluded from bundled file,
   resolve: {
     extensions: [".ts", ".tsx", ".js"]

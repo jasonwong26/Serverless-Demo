@@ -1,25 +1,25 @@
-import AWS from "aws-sdk"; // eslint-disable-line import/no-extraneous-dependencies
-import {DynamoDbParams, LambdaHandler} from "./types";
+import AWS from "aws-sdk";
+import {TodoItem} from "./types";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-const getHandler: LambdaHandler = (event, context, callback) => {
-  const params: AWS.DynamoDB.GetItemInput = {
+const handler = (event, context, callback) => {
+  const params: AWS.DynamoDB.DocumentClient.DeleteItemInput = {
     TableName: process.env.DYNAMODB_TABLE || "",
     Key: {
       id: event.pathParameters.id
     }
   };
 
-  // fetch todo from the database
-  dynamoDb.get(params, (error, result) => {
+  // delete the todo from the database
+  dynamoDb.delete(params, (error) => {
     // handle potential errors
     if (error) {
-      // console.error(error);
+      console.error(error); // tslint:disable-line no-console
       callback(null, {
         statusCode: error.statusCode || 501,
         headers: { "Content-Type": "text/plain" },
-        body: "Couldn't fetch the todo item."
+        body: "Couldn't remove the todo item."
       });
       return;
     }
@@ -27,10 +27,10 @@ const getHandler: LambdaHandler = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify(result.Item)
+      body: JSON.stringify({})
     };
     callback(null, response);
   });
 };
 
-export { getHandler as get };
+export { handler as deleteHandler };

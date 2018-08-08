@@ -14,8 +14,7 @@
     "build": "npm-run-all --parallel build:src build:serverless",
     "build:src": "babel-node tools/buildDev.js",
     "build:serverless": "babel-node tools/buildServerless.js",
-    "predeploy": "",
-    "deploy": "serverless deploy --package ./src"
+    "deploy": "cd dev && serverless deploy && cd ../"
   },
   "author": "Jason Wong",
   "license": "UNLICENSED",

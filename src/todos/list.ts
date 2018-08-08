@@ -1,8 +1,8 @@
 import AWS from "aws-sdk"; // eslint-disable-line import/no-extraneous-dependencies
-import {DynamoDbParams, LambdaHandler} from "./types";
+import {LambdaHandler} from "./types";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const params: DynamoDbParams = {
+const params: AWS.DynamoDB.DocumentClient.ScanInput = {
   TableName: process.env.DYNAMODB_TABLE || ""
 };
 
